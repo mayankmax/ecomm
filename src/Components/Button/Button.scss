@@ -1,0 +1,23 @@
+.btn {
+    margin-top: 10px;
+    border-color: azure;
+    text-align: center;
+    color: antiquewhite;
+    width: 100%; /* Button width will be 100% of its container */
+    max-width: 200px; /* Set a maximum width if needed */
+    height: auto; /* Allow the height to adjust based on content */
+    background-color: cadetblue;
+    border: 1px solid rgb(235, 21, 21);
+    padding: 10px; /* Increase padding for better touch/click experience */
+    cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+    font-size: 16px; /* Set a reasonable font size */
+    border-radius: 8px;
+
+  }
+  
+  /* Optional: Add hover styles for better user feedback */
+  .btn:hover {
+    background-color: darkcyan;
+    color: white;
+  }
+  

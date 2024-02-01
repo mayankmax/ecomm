@@ -1,0 +1,15 @@
+.input {
+   display: flex;
+    height: 40px;
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  /* Optional: Add media queries for different screen sizes */
+  @media (max-width: 600px) {
+    .input {
+      width: 100%; /* Adjust the width for smaller screens */
+    }
+  }
+  
