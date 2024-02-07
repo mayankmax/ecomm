@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 function Advertisement() {
   return (
-    <section>
+    <section className='ad-main'>
     <div className="advertisement-container">
         <div className='main'>
       <Carousel showThumbs={false} infiniteLoop className='carousel-main'>

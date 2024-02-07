@@ -11,11 +11,13 @@
   box-sizing: border-box;
   display: flex;
   position: sticky;
-  top: 1rem;
+  top: 0;
   align-items: center;
   width: 100%;
   height: var(--navbar-height);
   border-bottom: 1px solid #e5e7eb;
+  z-index: 999;
+  overflow: hidden;
 }
 
 .logo {
@@ -125,4 +127,11 @@
 
  
 
+}
+
+@media
+(prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
