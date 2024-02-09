@@ -27,7 +27,7 @@
    
   }
   
-  .product-body p {
+  .product-body span {
     background-color: rgb(253, 7, 241);
     
     padding: 1%;
@@ -45,25 +45,30 @@
   }
   
 
-  .bottomleft {
+  .product-bottom .bottomleft article {
 
     width: 20%;
-    display: inline-block;
+    display: flex;
+    background-color:rgb(255 255 255); 
+    position: absolute;
+    bottom: 0.5rem;
+    span{
+      background-color:rgb(255 255 255);
+      vertical-align: middle;
+    }
+    
   }
   
-  .bottomright {
-    box-sizing: border-box;
-    display: inline-block;
-   
-       
-   
-   
-  }
+//   .bottomright {
+//     box-sizing: border-box;
+//     display: inline-block;
+ 
+//   }
 
- .bottomright .btn{
+//  .bottomright .btn{
    
-    background-color: transparent;
-    color: black;
-    text-align: center;
-    font-size: large;
-  }
+//     background-color: transparent;
+//     color: black;
+//     text-align: center;
+//     font-size: large;
+//   }

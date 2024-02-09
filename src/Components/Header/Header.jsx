@@ -3,6 +3,7 @@ import { FaBeer } from 'react-icons/fa';
 import { Input } from '../Input';
 import DropHeader from './DropHeader';
 import './Header.scss';
+import Dropdown from './Dropdown';
 
 export default function Header() {
   const [showLinks, setShowLinks] = useState(false);
@@ -59,6 +60,7 @@ export default function Header() {
         </div>
       </nav>
       {showDropHeader && <DropHeader />}
+      <Dropdown />
     </div>
   );
 }
