@@ -6,7 +6,7 @@ import { Landed } from './Components/Section/Landed';
 import {Corner} from './Components/Section/Corner';
 import { ProductCard } from './Components/ProductCard';
 import Latest from './Components/Section/Latest/Latest';
-import {Login} from './Components/Login';
+
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
     <Corner />
     <Corner />
     <Latest />
-    <Login />
+   
       
     </div>
   );
