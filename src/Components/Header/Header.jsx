@@ -5,11 +5,13 @@ import DropHeader from './DropHeader';
 import './Header.scss';
 import Dropdown from './Dropdown';
 import {Login} from '../Login/';
+import { trie } from '../../Services/AutoSuggestion'; // trie is the root node which contain categories of the product in trie data structure
 
 export default function Header() {
   const [showLinks, setShowLinks] = useState(false);
   const [showDropHeader, setShowDropHeader] = useState(false);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState(null);
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);
@@ -19,7 +21,7 @@ export default function Header() {
     setShowDropHeader(shouldShow);
   };
 
-  ;
+  
 
   const openModal = () => {
     setIsOpen(true);
@@ -29,6 +31,14 @@ export default function Header() {
     console.log(isOpen)
     setIsOpen(!isOpen);
   };
+
+  const handleSearch = (e) =>{
+    setSearchValue(e.target.value);
+  }
+
+  // I need to set the node in as data in redux store
+  //I can use dispatch but the problem is why we need to dispatch it from here as this component should use root node to get the search result only
+  //but since I have written dispatch code to .js file but how to run that file is the problem
  
 
   return (
@@ -61,7 +71,7 @@ export default function Header() {
 
         <div className='icons'>
           <div className='icon'>
-            <Input className="searchbar" type="search" name="Search" />
+            <Input className="searchbar" type="search" name="Search" onChange={handleSearch} value={searchValue} />
           </div>
           <div className='icon'>
           {/* i want to open login model only when this is cliked */}

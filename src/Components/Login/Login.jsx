@@ -6,11 +6,13 @@ import { signupRequest } from '../../Redux/Action/SignupAction';
 export default function Login({ isOpen, toggleLogin }) {
   const [userData, setUserData] = useState('');
   const dispatch = useDispatch(); // Get dispatch function from Redux
-  const message = useSelector((state) => state.userData)
+  const message = useSelector((state) => state.user.error ? state.user.error.message:null)
  
-  useEffect(()=>{
-    console.log("ncjdb" +message)
-},[message])
+ // console.log("I am rendering"); // everytime I am typing in input field it is re rendering which is ok
+
+ 
+
+  console.log(message)
 
   const handleChange = (e) => {
     setUserData(e.target.value);
@@ -19,8 +21,9 @@ export default function Login({ isOpen, toggleLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     // Dispatch signupRequest action using dispatch
+
     dispatch(signupRequest(userData)); // Dispatch the action with userData
-    toggleLogin();
+    message && toggleLogin();
   };
 
   return (
@@ -36,6 +39,7 @@ export default function Login({ isOpen, toggleLogin }) {
               </div>
               <hr/>
               <div className="modal-right">
+              {message && <p>{message}</p>}
                 <form onSubmit={handleSubmit}>
                   <p>Enter your phone or email to continue.</p>
                   <p>

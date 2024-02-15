@@ -17,6 +17,11 @@
     border-radius: 8px;
     position: relative;
     width: 60%;
+    h2{
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    }
   }
   
   .close {
