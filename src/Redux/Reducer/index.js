@@ -2,8 +2,10 @@
 
 import { combineReducers } from 'redux';
 import signupReducer from './SignupReducer';
+import AutoSuggestionReducer from './AutoSuggestionReducer';
 const rootReducer = combineReducers({
   user: signupReducer,
+  autosuggest: AutoSuggestionReducer
   
 });
 

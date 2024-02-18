@@ -1,3 +1,5 @@
+import { ADD_ROOT } from "../Action/ActionTypes";
+
 const initialState = {
     trie:null //trie default value
 }
@@ -5,7 +7,7 @@ const initialState = {
 const AutoSuggestionReducer = (state = (initialState), action) =>{
 
     switch (action.type) {
-        case SEARCH_BAR_:
+        case ADD_ROOT:
             return{
                 ...state,
                 trie:action.payload
@@ -17,3 +19,5 @@ const AutoSuggestionReducer = (state = (initialState), action) =>{
     }
 
 }
+
+export default AutoSuggestionReducer;

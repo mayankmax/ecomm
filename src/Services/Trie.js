@@ -1,38 +1,53 @@
 class TrieNode {
-  constructor() {
-    this.children = new Array(26);
-    this.isEnd = false;
+    constructor() {
+      this.children = {};
+      this.isEndOfWord = false;
+    }
   }
-}
-
-class Trie {
-  constructor() {
+  
+  class Trie {
+    constructor() {
       this.root = new TrieNode();
-  }
-
-  insert(key) {
+    }
+  
+    insert(word) {
       let node = this.root;
-      for (let char of key) {
-          let index = char.charCodeAt(0) - 'a'.charCodeAt(0);
-          if (!node.children[index]) {
-              node.children[index] = new TrieNode();
-          }
-          node = node.children[index];
+      for (let i = 0; i < word.length; i++) {
+        let char = word[i];
+        if (!node.children[char]) {
+          node.children[char] = new TrieNode();
+        }
+        node = node.children[char];
       }
-      node.isEnd = true;
-  }
-
-  search(key) {
+      node.isEndOfWord = true;
+    }
+  
+    search(word) {
       let node = this.root;
-      for (let char of key) {
-          let index = char.charCodeAt(0) - 'a'.charCodeAt(0);
-          if (!node.children[index]) {
-              return false;
-          }
-          node = node.children[index];
+  
+      for (let i = 0; i < word.length; i++) {
+        let char = word[i];
+  
+        if (!node.children[char]) {
+          return false;
+        }
+        node = node.children[char];
       }
-      return node.isEnd;
+      return node.isEndOfWord;
+    }
+  
+    startsWith(prefix) {
+      let node = this.root;
+      for (let i = 0; i < prefix.length; i++) {
+        let char = prefix[i];
+        if (!node.children[char]) {
+          return false;
+        }
+        node = node.children[char];
+      }
+      return true;
+    }
   }
-}
-
-module.exports = Trie;
+  
+  // Optional export
+  module.exports = Trie;

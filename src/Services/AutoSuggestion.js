@@ -1,5 +1,5 @@
 
-import Trie from './Trie';
+// import Trie from './Trie';
 
 const categories = [
     "Shirt",
@@ -99,20 +99,47 @@ const categories = [
     "Sweatpants",
     "Tailored Pants"
 ];
+export function autoSuggest(trie, input) {
+    let node = trie.root; 
+    const suggestions = [];
+    
+    // Traverse the trie till the end of input
+    for (let i = 0; i < input.length; i++) {
+        const char = input[i];
+        if (!node.children[char]) {
+          break;
+        }
+        node = node.children[char];
+    }
+    
+    // Check if the input prefix exists in the trie
+    if (node.isEndOfWord) {
+        suggestions.push(input);
+    }
 
-const Trie = require('./Trie')
+    // Find suggestions based on the input prefix
+    findSuggestions(node, input, suggestions);
 
-let trie = new Trie();
+    return suggestions; // Return the suggestions array
+}
 
-for(let cat of categories){
-    for(let c of cat.toLowerCase()){
-        trie.insert(c);
+function findSuggestions(node, prefix, suggestions) {
+    if (node.isEndOfWord) {
+        suggestions.push(prefix); // Push prefix if it's a complete word
+    }
+    for (const [char, child] of Object.entries(node.children)) {
+        findSuggestions(child, prefix + char, suggestions); // Recursively find suggestions
     }
 }
 
-//create the logic for autosuffestion based on input it should return all the possible suggestions
-//eg if i type a it shoiuld retutn AnimationTimeline, apple apply, ass etc all the words which categories contain
+// Test auto-suggestion with an input prefix
+const Trie = require('./Trie');
+const trie = new Trie();
 
-export {trie};
+// Insert categories into the trie
+categories.forEach((title) => trie.insert(title.toLowerCase()));
 
+console.log("Auto-suggestions for prefix 'shir':");
+console.log(autoSuggest(trie, "shir"));
 
+export {trie}
