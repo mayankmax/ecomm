@@ -7,7 +7,7 @@ import Dropdown from './Dropdown';
 import {Login} from '../Login/';
 import { trie, autoSuggest } from '../../Services/AutoSuggestion'; // trie is the root node which contain categories of the product in trie data structure
 import { useDispatch, useSelector } from 'react-redux';
-import { AutoSuggestionAction } from '../../Redux/Action/AutoSuggestionAction';
+import { AutoSuggestionAction, searchResultAction } from '../../Redux/Action/AutoSuggestionAction';
 
 export default function Header() {
   const [showLinks, setShowLinks] = useState(false);
@@ -17,7 +17,11 @@ export default function Header() {
   const[result, setResult] =useState([]);
 
   const dispatch = useDispatch();
-  const updatedTrie = useSelector((state) => state.trie);
+  const updatedTrie = useSelector((state) => state.autosuggest.trie);
+  
+
+  // console.log("Updated Trie", updatedTrie);
+
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);
@@ -40,24 +44,35 @@ export default function Header() {
 
   const handleSearch = (e) =>{
     let value = e.target.value;
-    console.log(value);
-    setResult(autoSuggest(updatedTrie, value));
+    // console.log("value in",updatedTrie);
+    // setResult(autoSuggest(updatedTrie, value));
+    // console.log("result",result);
     setSearchValue(value);
   }
 
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
+  useEffect(()=>{
+
+    if(searchValue === null || updatedTrie === null || autoSuggest(updatedTrie,searchValue) === null)
+    setResult([]);
+    else
+    setResult(autoSuggest(updatedTrie, searchValue));
+    dispatch(searchResultAction(result));
+    // console.log("I AM RESULT",result);
+  },[searchValue])
+
+  // useEffect(() => {
+  //   console.log("I AM RESULT",result);
+  // }, [result]);
 
   useEffect(()=>{
-    console.log("I am trie",trie.root.children['a']);
+    console.log("I am trie",trie.root.children['s']);
     dispatch(AutoSuggestionAction(trie)); // making it available for the all the child component
   },[dispatch])
 
   // I need to set the node in as data in redux store
   //I can use dispatch but the problem is why we need to dispatch it from here as this component should use root node to get the search result only
   //but since I have written dispatch code to .js file but how to run that file is the problem
-  console.log(result);
+  // console.log(result);
 
   return (
     
@@ -90,7 +105,8 @@ export default function Header() {
 
         <div className='icons'>
           <div className='icon'>
-            <Input className="searchbar" type="search" name="Search" onChange={handleSearch} value={searchValue} />
+            <input className="searchbar" type="text" name="Search" onChange={handleSearch} value={searchValue} />
+            {/* <Dropdown style ={{zIndex:999, position:"absolute", top:"100px"}}/> */}
           </div>
           <div className='icon'>
           {/* i want to open login model only when this is cliked */}

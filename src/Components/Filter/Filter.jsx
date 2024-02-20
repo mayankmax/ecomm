@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './Filter.scss';
 import { Input } from '../Input';
-import {ProductCard} from '../ProductCard';
+import { ProductCard } from '../ProductCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Filter() {
   const [priceBodyVisible, setPriceBodyVisible] = useState(true);
   const [sizeBodyVisible, setSizeBodyVisible] = useState(true);
   const [availabilityBodyVisible, setAvailabilityBodyVisible] = useState(true);
+  const categoryResult = useSelector((state) => state.autosuggest.result);
+
+  console.log("hello result", categoryResult);
 
   const handlePriceClose = () => {
     setPriceBodyVisible(!priceBodyVisible);
@@ -44,8 +48,6 @@ export default function Filter() {
               {priceBodyVisible && (
                 <div className='price-body'>
                   {/* Input elements for price options */}
-                  {priceBodyVisible && (
-                <div className='price-body'>
                   <label className="input-label">
                     <Input type="radio" />
                     price less than 500
@@ -66,8 +68,6 @@ export default function Filter() {
                     <Input type="radio" />
                     price less than 900
                   </label>
-                </div>
-              )}
                 </div>
               )}
             </div>
@@ -144,55 +144,31 @@ export default function Filter() {
             <hr />
           </div>
           <div className='body-right'>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0" }}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
-          <div style={{width:"25%", padding:"1rem" ,paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div> 
-          </div>
-          <div style={{width:"25%", padding:"1rem", paddingTop:"0"}}>
-            <ProductCard className="filter-card"/>
-            <div>
-              <p>Product 1</p>
-              <p>Product description</p>
-            </div>
-          </div>
+            {/* Check if categoryResult is null or empty */}
+            {categoryResult && categoryResult.length > 0 ? (
+              // Render search results if categoryResult is not null and has items
+              categoryResult.map((result) => (
+                <div key={result.id} style={{ width: "25%", padding: "1rem", paddingTop: "0" }}>
+                  <ProductCard className="filter-card" />
+                  <div>
+                    <p>{result}</p> {/* Assuming result has a 'name' property */}
+                    <p>{result}</p> {/* Assuming result has a 'description' property */}
+                  </div>
+                </div>
+              ))
+            ) : (
+              // Render default behavior if categoryResult is null or empty
+              <>
+                <div style={{ width: "25%", padding: "1rem", paddingTop: "0" }}>
+                  <ProductCard className="filter-card" />
+                  <div>
+                    <p>Product 1</p>
+                    <p>Product description</p>
+                  </div>
+                </div>
+                {/* Additional default behavior components */}
+              </>
+            )}
           </div>
         </div>
       </div>

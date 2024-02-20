@@ -101,6 +101,12 @@ const categories = [
 ];
 export function autoSuggest(trie, input) {
     let node = trie.root; 
+
+    if(node === null)
+    return "I am null";
+
+    // console.log("sds",node.root.children);
+    
     const suggestions = [];
     
     // Traverse the trie till the end of input

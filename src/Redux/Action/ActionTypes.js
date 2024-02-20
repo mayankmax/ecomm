@@ -7,5 +7,5 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 //for searchBar in header
 export const ADD_ROOT = 'ADD_ROOT';
-export const SEARCH_BAR = 'SEARCH_BAR';
+export const SEARCH_RESULT = 'SEARCH_RESULT';
 //for searchbar in header

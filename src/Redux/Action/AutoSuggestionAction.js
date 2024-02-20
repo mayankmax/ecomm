@@ -1,9 +1,15 @@
-import { ADD_ROOT, SEARCH_BAR } from "./ActionTypes";
+import { ADD_ROOT, SEARCH_RESULT } from "./ActionTypes";
 
+export const AutoSuggestionAction = (trie) => {
+    return {
+        type: ADD_ROOT,
+        payload: trie
+    };
+};
 
-export const AutoSuggestionAction = (root) => {
-    return (dispatch) => {
-        // You can dispatch your action here
-        dispatch({ type: ADD_ROOT, payload: root });
+export const searchResultAction = (result) => {
+    return {
+        type: SEARCH_RESULT,
+        payload: result
     };
 };
